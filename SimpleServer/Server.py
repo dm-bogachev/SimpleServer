@@ -2,19 +2,20 @@ import socket
 from threading import Thread
 
 class Server(Thread):
-    """description of class"""
+    """A simple TCP/IP Server which receives data from client and redirect it to all other connected clients"""
     
     clients = []
 
-    def __init__(self, host='localhost', port=48569, timeout=60):
+    def __init__(self, host='localhost', port=48569, timeout=60, sname='TCP/IP Server'):
         self.host = host
         self.port = port
         self.timeout = timeout
+        self.sname = sname
         Thread.__init__(self)
-        print('TCP/IP Server was initialized')
+        print(self.sname + ' was initialized')
 
     def run(self):
-        print('TCP/IP Server was started')
+        print(self.sname + ' was started')
         self.listen()
 
     def bind(self):
@@ -25,7 +26,7 @@ class Server(Thread):
     def listen(self):
         self.bind()
         self.sock.listen(5)
-        print('TCP/IP Server is listening')
+        print(self.sname + ' is listening')
 
         while True:
             client, address = self.sock.accept()
