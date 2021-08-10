@@ -22,6 +22,7 @@ class Server(Thread):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.bind((self.host, self.port))
+        print(' '.join([self.sname, 'was bound to IP:', self.host, 'Port:', str(self.port)]))
         
     def listen(self):
         self.bind()
@@ -43,7 +44,7 @@ class Server(Thread):
             try:
                 data = client.recv(buf_size).decode('utf-8')
                 if data:
-                    print(' '.join(['Received data from', address[0] + ':', data]))
+                    print(' '.join(['Received data from', address[0] + ':', data.rstrip('\n')]))
                     for item in self.clients:
                         if item != client:
                             item.send(data.encode('utf-8'))
@@ -57,8 +58,10 @@ class Server(Thread):
                 return False
 
 if __name__ == '__main__':
-    server = Server(host='192.168.0.248', 
+    host = socket.gethostbyname(socket.gethostname())
+    server = Server(host=host, 
                            port=48569, 
                            timeout=None, 
                            sname='CoffeeRobot TCP/IP Server')
     server.start()
+    pass
