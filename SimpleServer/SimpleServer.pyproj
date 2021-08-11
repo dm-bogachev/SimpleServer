@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>27f6d18b-f9bf-4c72-91b6-f141b21c3681</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>SimpleServer.py</StartupFile>
+    <StartupFile>SimpleServerGUI.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="SimpleServer.py" />
+    <Compile Include="SimpleServerGUI.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
