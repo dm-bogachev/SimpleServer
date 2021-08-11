@@ -4,7 +4,8 @@ import tkinter.ttk as ttk
 from datetime import datetime
 import os
 
-class ServerGUIExtension(Server):
+class ServerGUIExtension(ThreadedServer):
+    """A simple TCP/IP Server extension implementing GUI functions"""
 
     def __init__(self, host='localhost', port=48569, timeout=60, sname='TCP/IP Server', tkroot=None):
         self.tkroot = tkroot
