@@ -56,19 +56,10 @@ class ServerGUIExtension(ThreadedServer):
         ysb.grid(row=1, column=1, sticky=tk.N + tk.S)
 
 
-def tk_init_connectionwindow():
-    host_label = tk.Label(con_root, text='Host:').grid(row=0, column=0)
-    host = socket.gethostbyname(socket.gethostname())
-    host_entry = tk.Entry(con_root, width=30, textvariable=host).grid(row=0, column=1, columnspan=3)
-    
-def callback():
-    global log_root, server
-    log_root.destroy()
-
 if __name__ == '__main__':
     log_root = tk.Tk()
     log_root.resizable(0, 0)
-    log_root.protocol('WM_DELETE_WINDOW', callback)
+    log_root.protocol('WM_DELETE_WINDOW', log_root.destroy)
     host = socket.gethostbyname(socket.gethostname())
     server = ServerGUIExtension(host=host,
                 port=48569, 
