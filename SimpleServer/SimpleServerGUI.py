@@ -15,7 +15,7 @@ class ServerGUIExtension(ThreadedServer):
             self.tk_init_listbox()
         return super().__init__(host=host, port=port, timeout=timeout, sname=sname)
 
-    def on_receive(self, client_ip):
+    def print_received(self, client_ip):
         if (self.tkroot != None):
             self.receive_log.insert("", tk.END, values=(datetime.now().strftime('%H:%M:%S'), 
                                                         client_ip, 
@@ -33,14 +33,14 @@ class ServerGUIExtension(ThreadedServer):
             return super().print(msg=msg)
 
     def tk_init_listbox(self):
-        self.connect_log = tk.Listbox(self.tkroot)
+        self.connect_log = tk.Listbox(self.tkroot, height=15)
         ysb = ttk.Scrollbar(self.tkroot, orient="vertical",command=self.connect_log.yview)
         self.connect_log.configure(yscrollcommand=ysb.set)
         self.connect_log.grid(row=0, column=0, sticky=tk.N + tk.S + tk.E + tk.W)
         ysb.grid(row=0, column=1, sticky=tk.N + tk.S)
 
     def tk_init_treeview(self):
-        self.receive_log = ttk.Treeview(self.tkroot)
+        self.receive_log = ttk.Treeview(self.tkroot, height=21)
         ysb = ttk.Scrollbar(self.tkroot, orient="vertical",command=self.receive_log.yview)
         self.receive_log.configure(yscrollcommand=ysb.set)
         self.receive_log['columns']=('Time', 'From', 'Data')
@@ -58,6 +58,7 @@ class ServerGUIExtension(ThreadedServer):
 
 if __name__ == '__main__':
     log_root = tk.Tk()
+    log_root.geometry('1160x700')
     log_root.resizable(0, 0)
     log_root.protocol('WM_DELETE_WINDOW', log_root.destroy)
     host = socket.gethostbyname(socket.gethostname())

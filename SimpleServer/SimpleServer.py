@@ -1,6 +1,5 @@
 from ThreadedServer import *
 
-
 if __name__ == '__main__':
     host = socket.gethostbyname(socket.gethostname())
     server = ThreadedServer(host=host, 

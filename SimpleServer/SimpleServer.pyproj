@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ExtendedServer.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SimpleServer.py" />
     <Compile Include="SimpleServerGUI.py">
       <SubType>Code</SubType>

@@ -40,7 +40,13 @@ class ThreadedServer(Thread):
             thread = Thread(target=self.client_handle, args=(client, address,)).start()
             self.threads.append(thread)
 
-    def on_receive(self, client_ip=''):
+    def on_receive(self, client, address):
+        for item in self.clients:
+            if item != client:
+                item.send(self.data.encode('utf-8'))      
+        self.print_received(address[0])
+
+    def print_received(self, client_ip):
         self.print(['Received data from', client_ip + ':', self.data.rstrip('\n')])
 
     def print(self, msg):
@@ -48,6 +54,7 @@ class ThreadedServer(Thread):
             print(' '.join(msg))
         if type(msg) == type(''):
             print(msg)
+
 
     def client_handle(self, client, address):
         buf_size = 4096
@@ -58,10 +65,7 @@ class ThreadedServer(Thread):
             try:
                 self.data = client.recv(buf_size).decode('utf-8')
                 if self.data:
-                    self.on_receive(address[0])
-                    for item in self.clients:
-                        if item != client:
-                            item.send(self.data.encode('utf-8'))
+                    self.on_receive(client, address)   
                 else:
                     raise error('Client disconnected')
 
