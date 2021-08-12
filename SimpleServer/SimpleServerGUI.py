@@ -1,8 +1,8 @@
-from SimpleServer import *
+from ThreadedServer import *
 import tkinter as tk
 import tkinter.ttk as ttk
 from datetime import datetime
-import os
+import socket
 
 class ServerGUIExtension(ThreadedServer):
     """A simple TCP/IP Server extension implementing GUI functions"""

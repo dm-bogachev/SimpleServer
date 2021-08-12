@@ -1,3 +1,4 @@
+from os import error
 import socket
 from threading import Thread
 
@@ -70,6 +71,7 @@ class ThreadedServer(Thread):
                     raise error('Client disconnected')
 
             except Exception as e:
+                print(e)
                 self.print(['Client with IP:', address[0], 'was disconnected!'])
                 self.clients.remove(client)
                 client.close()

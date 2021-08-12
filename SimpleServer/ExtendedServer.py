@@ -2,8 +2,24 @@ from ThreadedServer import *
 
 class ExtendedServer(ThreadedServer):
     
+    client_map = {}
+
+    CMD_REGISTER = "reg_client"
+
+    def register_client(self, data):
+        #if (data.con)
+        pass
+        pass
+
     def on_receive(self, client, address):
-        #splitted_data = self.data.split()
+        if CMD_REGISTER in self.data:
+            self.register_client(self.data)
+            pass
+
+        splitted_data = self.data.split(';')
+        if len(splitted_data) >= 3:
+            _from = splitted_data[0]
+            #_to = 
         for item in self.clients:
             if item != client:
                 item.send(self.data.encode('utf-8'))
